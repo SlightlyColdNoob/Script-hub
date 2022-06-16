@@ -1,0 +1,251 @@
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local FLING = Instance.new("TextButton")
+local MM2 = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
+local Admin = Instance.new("TextButton")
+local X = Instance.new("TextButton")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame.Position = UDim2.new(0.280146152, 0, 0.276083469, 0)
+Frame.Size = UDim2.new(0, 324, 0, 279)
+
+FLING.Name = "FLING"
+FLING.Parent = Frame
+FLING.BackgroundColor3 = Color3.fromRGB(91, 91, 91)
+FLING.Position = UDim2.new(0.679080069, 0, 0.819039524, 0)
+FLING.Size = UDim2.new(0, 103, 0, 50)
+FLING.Font = Enum.Font.SourceSans
+FLING.Text = "Fling"
+FLING.TextColor3 = Color3.fromRGB(0, 0, 0)
+FLING.TextSize = 14.000
+FLING.MouseButton1Down:connect(function()
+	local lp = game:FindService("Players").LocalPlayer
+
+	local function gplr(String)
+		local Found = {}
+		local strl = String:lower()
+		if strl == "all" then
+			for i,v in pairs(game:FindService("Players"):GetPlayers()) do
+				table.insert(Found,v)
+			end
+		elseif strl == "others" then
+			for i,v in pairs(game:FindService("Players"):GetPlayers()) do
+				if v.Name ~= lp.Name then
+					table.insert(Found,v)
+				end
+			end 
+		elseif strl == "me" then
+			for i,v in pairs(game:FindService("Players"):GetPlayers()) do
+				if v.Name == lp.Name then
+					table.insert(Found,v)
+				end
+			end 
+		else
+			for i,v in pairs(game:FindService("Players"):GetPlayers()) do
+				if v.Name:lower():sub(1, #String) == String:lower() then
+					table.insert(Found,v)
+				end
+			end 
+		end
+		return Found 
+	end
+
+	local function notif(str,dur)
+		game:FindService("StarterGui"):SetCore("SendNotification", {
+			Title = "yeet gui",
+			Text = str,
+			Icon = "rbxassetid://2005276185",
+			Duration = dur or 3
+		})
+	end
+
+	--// sds
+
+	local h = Instance.new("ScreenGui")
+	local Main = Instance.new("ImageLabel")
+	local Top = Instance.new("Frame")
+	local Title = Instance.new("TextLabel")
+	local TextBox = Instance.new("TextBox")
+	local TextButton = Instance.new("TextButton")
+
+	h.Name = "h"
+	h.Parent = game:GetService("CoreGui")
+	h.ResetOnSpawn = false
+
+	Main.Name = "Main"
+	Main.Parent = h
+	Main.Active = true
+	Main.Draggable = true
+	Main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Main.BorderSizePixel = 0
+	Main.Position = UDim2.new(0.174545452, 0, 0.459574461, 0)
+	Main.Size = UDim2.new(0, 454, 0, 218)
+	Main.Image = "rbxassetid://2005276185"
+
+	Top.Name = "Top"
+	Top.Parent = Main
+	Top.BackgroundColor3 = Color3.fromRGB(57, 57, 57)
+	Top.BorderSizePixel = 0
+	Top.Size = UDim2.new(0, 454, 0, 44)
+
+	Title.Name = "Title"
+	Title.Parent = Top
+	Title.BackgroundColor3 = Color3.fromRGB(49, 49, 49)
+	Title.BorderSizePixel = 0
+	Title.Position = UDim2.new(0, 0, 0.295454562, 0)
+	Title.Size = UDim2.new(0, 454, 0, 30)
+	Title.Font = Enum.Font.SourceSans
+	Title.Text = "FE Yeet Gui (trollface edition)"
+	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Title.TextScaled = true
+	Title.TextSize = 14.000
+	Title.TextWrapped = true
+
+	TextBox.Parent = Main
+	TextBox.BackgroundColor3 = Color3.fromRGB(49, 49, 49)
+	TextBox.BorderSizePixel = 0
+	TextBox.Position = UDim2.new(0.0704845786, 0, 0.270642221, 0)
+	TextBox.Size = UDim2.new(0, 388, 0, 62)
+	TextBox.Font = Enum.Font.SourceSans
+	TextBox.PlaceholderText = "Who do i destroy(can be shortened)"
+	TextBox.Text = ""
+	TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+	TextBox.TextScaled = true
+	TextBox.TextSize = 14.000
+	TextBox.TextWrapped = true
+
+	TextButton.Parent = Main
+	TextButton.BackgroundColor3 = Color3.fromRGB(49, 49, 49)
+	TextButton.BorderSizePixel = 0
+	TextButton.Position = UDim2.new(0.10352423, 0, 0.596330225, 0)
+	TextButton.Size = UDim2.new(0, 359, 0, 50)
+	TextButton.Font = Enum.Font.SourceSans
+	TextButton.Text = "Cheese em'"
+	TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+	TextButton.TextScaled = true
+	TextButton.TextSize = 14.000
+	TextButton.TextWrapped = true
+
+	TextButton.MouseButton1Click:Connect(function()
+		local Target = gplr(TextBox.Text)
+		if Target[1] then
+			Target = Target[1]
+
+			local Thrust = Instance.new('BodyThrust', lp.Character.HumanoidRootPart)
+			Thrust.Force = Vector3.new(9999,9999,9999)
+			Thrust.Name = "YeetForce"
+			repeat
+				lp.Character.HumanoidRootPart.CFrame = Target.Character.HumanoidRootPart.CFrame
+				Thrust.Location = Target.Character.HumanoidRootPart.Position
+				game:FindService("RunService").Heartbeat:wait()
+			until not Target.Character:FindFirstChild("Head")
+		else
+			notif("Invalid player")
+		end
+	end)
+
+	--//fsddfsdf
+	notif("Loaded successfully! Created by scuba#0001", 5)
+end)
+
+MM2.Name = "MM2"
+MM2.Parent = Frame
+MM2.BackgroundColor3 = Color3.fromRGB(91, 91, 91)
+MM2.Position = UDim2.new(0.679080069, 0, 0.603985786, 0)
+MM2.Size = UDim2.new(0, 103, 0, 50)
+MM2.Font = Enum.Font.SourceSans
+MM2.Text = "MM2"
+MM2.TextColor3 = Color3.fromRGB(0, 0, 0)
+MM2.TextSize = 14.000
+MM2.MouseButton1Down:connect(function()
+	loadstring(game:GetObjects("rbxassetid://4001118261")[1].Source)()
+end)
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.Size = UDim2.new(0, 323, 0, 50)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Dumb_noobNGL's exploit gui"
+TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.TextSize = 14.000
+
+Admin.Name = "Admin"
+Admin.Parent = Frame
+Admin.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Admin.Position = UDim2.new(0.688271642, 0, 0.426523328, 0)
+Admin.Size = UDim2.new(0, 96, 0, 40)
+Admin.Font = Enum.Font.SourceSans
+Admin.Text = "Admin"
+Admin.TextColor3 = Color3.fromRGB(0, 0, 0)
+Admin.TextSize = 14.000
+Admin.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+end)
+
+X.Name = "X"
+X.Parent = ScreenGui
+X.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+X.BorderColor3 = Color3.fromRGB(255, 149, 0)
+X.Position = UDim2.new(0.929790497, 0, 0.909968495, 0)
+X.Size = UDim2.new(0, 44, 0, 38)
+X.Font = Enum.Font.SourceSans
+X.Text = "X"
+X.TextColor3 = Color3.fromRGB(0, 0, 0)
+X.TextScaled = true
+X.TextSize = 14.000
+X.TextWrapped = true
+
+-- Scripts:
+
+local function NGYQ_fake_script() -- X.Open/Close (PUT ME IN A TEXTBUTTON) 
+	local script = Instance.new('LocalScript', X)
+
+	script.Parent.MouseButton1Click:connect(function()
+	 script.Parent.Parent.Frame.Visible = not script.Parent.Parent.Frame.Visible
+	end)
+	
+	--                                                               ^
+	--]]	Change "Credit" to the name of the frame                 ^                      
+end
+coroutine.wrap(NGYQ_fake_script)()
+local function EKLMRX_fake_script() -- nil.Instructions 
+	local script = Instance.new('Script', nil)
+
+	---Hello! Thank you for using this script originally by Roman On Fire on YouTube!
+	
+	--First of all- I'm dumb. I'm taking no credit for this. All credit goes to Roman On Fire.
+	
+	--SO!
+	
+	
+	----- ~Instructions~ -----
+	
+	-- 1. Make a TextButton 
+	-- 2. Make a Frame, and rename it Credit (if you don't want to touch the script)
+	--	 or rename it whatever (Menu, Rules) and then in the script you'll see what to do.
+	--3. Customize yer stuff, and make the frame invisible by unchecking "Visible."
+	
+	----- ~Done~ -----
+	
+	--And again, thank you. You may want to delete this after.
+	
+	--- ~~Published by LAClout ~~ ---
+	
+	--I don't know if this was already published by anyone else, but I'm sorry if this was.
+	
+	--P.S. Publishing this as your own is like saying "I suck at this stuff, so I'mma be a 
+	--	wannabe and say "I made this"
+end
+coroutine.wrap(EKLMRX_fake_script)()
